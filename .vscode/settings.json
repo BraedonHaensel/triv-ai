@@ -1,0 +1,10 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "path-intellisense.mappings": {
+    "/": "${workspaceFolder}/public"
+  },
+  "files.insertFinalNewline": true
+}
