@@ -12,6 +12,9 @@ Code formatting:
 Extensions:
 
 - Prettifier - Code formatter
+- Prisma
+- Tailwind CSS IntelliSense
+- ES7+ React/Redux/React-Native snippets
 
 ShadCN
 
@@ -25,7 +28,10 @@ Prisma and PostgreSQL
 - https://console.prisma.io/cmdb46yeo003wxj0vbwmvqo2p/overview
 - https://www.prisma.io/
 - https://www.prisma.io/docs/getting-started/prisma-postgres/from-the-cli
--
+
+Google Cloud
+
+- https://console.cloud.google.com
 
 PowerShell Permissions Error:
 

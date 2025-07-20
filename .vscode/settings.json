@@ -6,5 +6,6 @@
   "path-intellisense.mappings": {
     "/": "${workspaceFolder}/public"
   },
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" }
 }

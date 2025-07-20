@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/generated/prisma/client";
 import "server-only";
 
 declare global {
-  // eslint-disable-next-line-no-var, no-unused-vars
+  // eslint-disable-next-line no-var, no-unused-vars
   var cachedPrisma: PrismaClient;
 }
 
