@@ -1,28 +1,27 @@
-"use client";
+'use client';
 
-import { User } from "next-auth";
-import React from "react";
+import { User } from 'next-auth';
+import React from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import Link from "next/link";
-import { signOut } from "next-auth/react";
-import { LogOut } from "lucide-react";
-import UserAvatar from "./UserAvatar";
+} from './ui/dropdown-menu';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { LogOut } from 'lucide-react';
+import UserAvatar from './UserAvatar';
 
 type Props = {
-  user: Pick<User, "name" | "image" | "email">;
+  user: Pick<User, 'name' | 'image' | 'email'>;
 };
 
 const UserAccountNav = ({ user }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {/* user avatar */}
         <UserAvatar user={user} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-white" align="end">
@@ -48,10 +47,10 @@ const UserAccountNav = ({ user }: Props) => {
             e.preventDefault();
             signOut().catch(console.error);
           }}
-          className="text-red-600 cursor-pointer"
+          className="cursor-pointer text-red-600"
         >
           Sign Out
-          <LogOut className="w-4 h-4 text-inherit" />
+          <LogOut className="h-4 w-4 text-inherit" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,44 +1,34 @@
-import { Button } from "@/components/ui/button";
-import { PrismaClient } from "../generated/prisma/client";
-import { withAccelerate } from "@prisma/extension-accelerate";
-import { prisma } from "@/lib/db";
+import SignInButton from '@/components/SignInButton';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { getAuthSession } from '@/lib/nextauth';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  const prisma = new PrismaClient().$extends(withAccelerate());
-  console.log("Hello");
-
-  let text = {};
-
-  async function addUser() {
-    // Was getting unique user error.
-    // const user = await prisma.user.create({
-    //   data: {
-    //     name: "Alice",
-    //     email: "alicebaaa@prisma.io",
-    //   },
-    // });
-
-    const users = await prisma.user.findMany();
-    console.log(users);
-
-    console.log("Users queried");
-    text = users;
+export default async function Home() {
+  const session = await getAuthSession();
+  if (session?.user) {
+    // User is logged in. Redirect to dashboard.
+    return redirect('/dashboard');
   }
-
-  addUser()
-    .then(async () => {
-      await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-      console.error(e);
-      await prisma.$disconnect();
-      process.exit(1);
-    });
-
   return (
-    <>
-      <Button>Hello World</Button>
-      <p>{JSON.stringify(text)}</p>
-    </>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Welcome to TrivAI!</CardTitle>
+          <CardDescription>
+            Are you ready to kickstart your AI-powered trivia journey? Log in
+            below to get started!
+          </CardDescription>
+          <CardContent>
+            <SignInButton text="Sign In with Google!" />
+          </CardContent>
+        </CardHeader>
+      </Card>
+    </div>
   );
 }
