@@ -33,6 +33,10 @@ Google Cloud
 
 - https://console.cloud.google.com
 
+Lucide
+
+- https://lucide.dev/
+
 PowerShell Permissions Error:
 
 1. Run PowerShell as administrator
