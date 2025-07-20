@@ -17,6 +17,16 @@ ShadCN
 
 - https://ui.shadcn.com/
 
+Prisma and PostgreSQL
+
+- npx prisma studio
+- npx prisma db push (required after any prisma.schema changes)
+- npx prisma generate --no-engine
+- https://console.prisma.io/cmdb46yeo003wxj0vbwmvqo2p/overview
+- https://www.prisma.io/
+- https://www.prisma.io/docs/getting-started/prisma-postgres/from-the-cli
+-
+
 PowerShell Permissions Error:
 
 1. Run PowerShell as administrator
