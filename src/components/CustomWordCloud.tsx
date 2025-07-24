@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const CustomWordCloud = (props: Props) => {
-  return (
-    <div>CustomWordCloud</div>
-  )
-}
+  return <div>Make this a suggested topics page instead</div>;
+};
 
-export default CustomWordCloud
+export default CustomWordCloud;

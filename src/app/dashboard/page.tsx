@@ -9,7 +9,7 @@ import RecentActivities from './RecentActivities';
 type Props = {};
 
 export const metadata = {
-  title: 'Dashboard | Quizmify',
+  title: 'Dashboard | TrivAI',
 };
 
 const Dashboard = async (props: Props) => {
