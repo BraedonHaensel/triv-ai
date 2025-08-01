@@ -18,12 +18,14 @@ Extensions:
 
 ShadCN
 
+- For React components
 - https://ui.shadcn.com/
 
 Prisma and PostgreSQL
 
-- npx prisma studio
+- For the database
 - npx prisma db push (required after any prisma.schema changes)
+- npx prisma studio (database viewer)
 - npx prisma generate --no-engine
 - https://console.prisma.io/cmdb46yeo003wxj0vbwmvqo2p/overview
 - https://www.prisma.io/
@@ -31,11 +33,25 @@ Prisma and PostgreSQL
 
 Google Cloud
 
+- For Google sign in support
 - https://console.cloud.google.com
+
+Google AI Studio
+
+- For AI question generation
+- https://aistudio.google.com/
 
 Lucide
 
+- For icons
 - https://lucide.dev/
+
+Insomnia
+
+- For request testing
+- https://insomnia.rest/
+- Ex: POST - localhost:3000/api/questions
+- Body - {"amount": 3, "topic": "theories of evolution", "type": "mcq"}
 
 PowerShell Permissions Error:
 
