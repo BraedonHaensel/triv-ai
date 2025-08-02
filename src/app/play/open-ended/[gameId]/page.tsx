@@ -2,8 +2,8 @@ import React from 'react';
 
 type Props = {};
 
-const MCQPage = async (props: Props) => {
-  return <div>MCQPage</div>;
+const OpenEndedPage = async (props: Props) => {
+  return <div>OpenEndedPage</div>;
 };
 
-export default MCQPage;
+export default OpenEndedPage;
