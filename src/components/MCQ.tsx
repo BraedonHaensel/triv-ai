@@ -1,11 +1,19 @@
 'use client';
 
 import { Game, Question } from '@/generated/prisma';
-import { ChevronRight, Timer } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { BarChart, ChevronRight, LoaderCircle, Timer } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
 import MCQCounter from './MCQCounter';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { checkAnswerSchema } from '@/schemas/form/quiz';
+import z from 'zod';
+import { toast } from 'sonner';
+import Link from 'next/link';
+import { cn, formatTimeDelta } from '@/lib/utils';
+import { differenceInSeconds } from 'date-fns';
 
 type Props = {
   game: Game & { questions: Pick<Question, 'id' | 'options' | 'question'>[] };
@@ -14,6 +22,21 @@ type Props = {
 const MCQ = ({ game }: Props) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<number>(0);
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+  const [wrongAnswers, setWrongAnswers] = useState<number>(0);
+  const [hasEnded, setHasEnded] = useState<boolean>(false);
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!hasEnded) {
+        setElapsedTime(differenceInSeconds(new Date(), game.timeStarted));
+      }
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [hasEnded]);
 
   const currentQuestion = useMemo(() => {
     return game.questions[questionIndex];
@@ -24,6 +47,71 @@ const MCQ = ({ game }: Props) => {
     if (!currentQuestion.options) return [];
     return JSON.parse(currentQuestion.options as string) as string[];
   }, [currentQuestion]);
+
+  const { mutate: checkAnswer, isPending: isChecking } = useMutation({
+    mutationFn: async () => {
+      const payload: z.infer<typeof checkAnswerSchema> = {
+        questionId: currentQuestion.id,
+        userAnswer: options[selectedChoice],
+      };
+      const response = await axios.post('/api/checkAnswer', payload);
+      return response.data;
+    },
+  });
+
+  const handleNext = useCallback(() => {
+    if (isChecking) return;
+    checkAnswer(undefined, {
+      onSuccess: ({ isCorrect }) => {
+        if (isCorrect) {
+          toast.success('Correct!');
+          setCorrectAnswers((prev) => prev + 1);
+        } else {
+          toast.error('Wrong answer!');
+          setWrongAnswers((prev) => prev + 1);
+        }
+        if (questionIndex === game.questions.length - 1) {
+          setHasEnded(true);
+          return;
+        }
+        setQuestionIndex((prev) => prev + 1);
+      },
+    });
+  }, [checkAnswer, toast, isChecking, questionIndex, game.questions.length]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const { key } = event;
+
+      if (/^[1-4]$/.test(key)) {
+        setSelectedChoice(Number(key) - 1);
+      } else if (key === 'Enter') {
+        handleNext();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleNext]);
+
+  if (hasEnded) {
+    return (
+      <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center">
+        <div className="mt-2 rounded-md bg-green-500 px-4 font-semibold whitespace-nowrap text-white">
+          You completed in {formatTimeDelta(elapsedTime)}
+        </div>
+        <Link
+          href={`/statistics/${game.id}`}
+          className={cn(buttonVariants(), 'mt-2')}
+        >
+          View Statistics
+          <BarChart className="ml-2 h-4 w-4" />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="absolute top-1/2 left-1/2 w-[90vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 md:w-[80vw]">
@@ -38,10 +126,13 @@ const MCQ = ({ game }: Props) => {
           </p>
           <div className="mt-3 flex self-start text-slate-400">
             <Timer className="mr-2" />
-            <span>00:00</span>
+            {formatTimeDelta(elapsedTime)}
           </div>
         </div>
-        <MCQCounter correctAnswers={3} wrongAnswers={4} />
+        <MCQCounter
+          correctAnswers={correctAnswers}
+          wrongAnswers={wrongAnswers}
+        />
       </div>
 
       <Card className="mt-4 w-full">
@@ -78,7 +169,8 @@ const MCQ = ({ game }: Props) => {
             </Button>
           );
         })}
-        <Button className="mt-2">
+        <Button className="mt-2" onClick={handleNext} disabled={isChecking}>
+          {isChecking && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
           Next <ChevronRight className="ml-2 h-4 w-4" />
         </Button>
       </div>

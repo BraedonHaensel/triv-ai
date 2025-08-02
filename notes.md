@@ -53,6 +53,11 @@ Insomnia
 - Ex: POST - localhost:3000/api/questions
 - Body - {"amount": 3, "topic": "theories of evolution", "type": "mcq"}
 
+Sonner
+
+- For notifications
+- https://sonner.emilkowal.ski/
+
 PowerShell Permissions Error:
 
 1. Run PowerShell as administrator
