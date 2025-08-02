@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { quizCreationSchema } from '@/schemas/form/quiz';
 import { ZodError } from 'zod';
 import { GenerateContentResponse, GoogleGenAI, Type } from '@google/genai';
-import { getAuthSession } from '@/lib/nextauth';
 
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
 // Docs: https://ai.google.dev/gemini-api/docs/structured-output#javascript.
@@ -89,17 +88,17 @@ const getMCQQuestions = async (amount: number, topic: string) => {
 //}
 export const POST = async (req: Request) => {
   try {
-    const session = await getAuthSession();
-    if (!session?.user) {
-      return NextResponse.json(
-        {
-          error: 'You must be logged in to create a quiz',
-        },
-        {
-          status: 401,
-        }
-      );
-    }
+    // const session = await getAuthSession();
+    // if (!session?.user) {
+    //   return NextResponse.json(
+    //     {
+    //       error: 'You must be logged in to create a quiz',
+    //     },
+    //     {
+    //       status: 401,
+    //     }
+    //   );
+    // }
     const body = await req.json();
     const { amount, topic, type } = quizCreationSchema.parse(body);
     let questions;
