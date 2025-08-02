@@ -10,7 +10,7 @@ const ai = new GoogleGenAI({});
 const getOpenEndedQuestions = async (amount: number, topic: string) => {
   const response: GenerateContentResponse = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
-    contents: `Generate a list of easy pairs of open ended trivia questions and answers about the topic "${topic}. Limit each question to 15 words. Make each answer concise.`,
+    contents: `Generate a list of easy pairs of trivia questions and answers about the topic "${topic}. Limit each question to 15 words. Answers should be around 15 words`,
     config: {
       responseMimeType: 'application/json',
       responseSchema: {
