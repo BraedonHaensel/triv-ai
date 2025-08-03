@@ -8,7 +8,7 @@ import { Button, buttonVariants } from './ui/button';
 import MCQCounter from './MCQCounter';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { checkAnswerSchema } from '@/schemas/form/quiz';
+import { checkAnswerSchema, endGameSchema } from '@/schemas/form/quiz';
 import z from 'zod';
 import { toast } from 'sonner';
 import Link from 'next/link';
@@ -26,17 +26,6 @@ const MCQ = ({ game }: Props) => {
   const [wrongAnswers, setWrongAnswers] = useState<number>(0);
   const [hasEnded, setHasEnded] = useState<boolean>(false);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!hasEnded) {
-        setElapsedTime(differenceInSeconds(new Date(), game.timeStarted));
-      }
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [hasEnded]);
 
   const currentQuestion = useMemo(() => {
     return game.questions[questionIndex];
@@ -59,6 +48,27 @@ const MCQ = ({ game }: Props) => {
     },
   });
 
+  const { mutate: endGame } = useMutation({
+    mutationFn: async () => {
+      const payload: z.infer<typeof endGameSchema> = {
+        gameId: game.id,
+      };
+      const response = await axios.post(`/api/endGame`, payload);
+      return response.data;
+    },
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!hasEnded) {
+        setElapsedTime(differenceInSeconds(new Date(), game.timeStarted));
+      }
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [hasEnded]);
+
   const handleNext = useCallback(() => {
     if (isChecking) return;
     checkAnswer(undefined, {
@@ -71,13 +81,21 @@ const MCQ = ({ game }: Props) => {
           setWrongAnswers((prev) => prev + 1);
         }
         if (questionIndex === game.questions.length - 1) {
+          endGame();
           setHasEnded(true);
           return;
         }
         setQuestionIndex((prev) => prev + 1);
       },
     });
-  }, [checkAnswer, toast, isChecking, questionIndex, game.questions.length]);
+  }, [
+    checkAnswer,
+    endGame,
+    toast,
+    isChecking,
+    questionIndex,
+    game.questions.length,
+  ]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

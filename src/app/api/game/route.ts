@@ -4,7 +4,6 @@ import { quizCreationSchema } from '@/schemas/form/quiz';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/db';
 import axios from 'axios';
-import { useMutation } from '@tanstack/react-query';
 
 // /api/game
 export async function POST(req: Request, res: Response) {
