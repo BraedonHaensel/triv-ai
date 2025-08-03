@@ -8,7 +8,7 @@ type Props = {
 
 const ResultsCard = ({ accuracy }: Props) => {
   return (
-    <Card className="md:col-span-6">
+    <Card className="md:col-span-12">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <CardTitle className="text-2xl font-bold">Results</CardTitle>
         <Award />
