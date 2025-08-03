@@ -21,11 +21,11 @@ type Props = {
 
 const MCQ = ({ game }: Props) => {
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [selectedChoice, setSelectedChoice] = useState<number>(0);
-  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
-  const [wrongAnswers, setWrongAnswers] = useState<number>(0);
-  const [hasEnded, setHasEnded] = useState<boolean>(false);
-  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [selectedChoice, setSelectedChoice] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [hasEnded, setHasEnded] = useState(false);
 
   const currentQuestion = useMemo(() => {
     return game.questions[questionIndex];

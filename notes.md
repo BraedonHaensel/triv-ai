@@ -58,6 +58,13 @@ Sonner
 - For notifications
 - https://sonner.emilkowal.ski/
 
+Storyset
+
+- For GIFs
+- https://storyset.com/
+- Edit with https://ezgif.com/
+- Remove background with https://www.unscreen.com/upload
+
 PowerShell Permissions Error:
 
 1. Run PowerShell as administrator

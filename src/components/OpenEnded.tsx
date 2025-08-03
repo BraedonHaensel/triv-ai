@@ -21,9 +21,9 @@ type Props = {
 
 const OpenEnded = ({ game }: Props) => {
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [blankAnswer, setBlankAnswer] = useState<string>('');
-  const [hasEnded, setHasEnded] = useState<boolean>(false);
-  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [blankAnswer, setBlankAnswer] = useState('');
+  const [hasEnded, setHasEnded] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
