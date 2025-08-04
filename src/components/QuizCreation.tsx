@@ -30,11 +30,13 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import LoadingQuestions from './LoadingQuestions';
 
-type Props = {};
+type Props = {
+  prefilledTopic?: string;
+};
 
 type Input = z.infer<typeof quizCreationSchema>;
 
-const QuizCreation = (props: Props) => {
+const QuizCreation = ({ prefilledTopic = '' }: Props) => {
   const router = useRouter();
   const [showLoader, setShowLoader] = useState(false);
   const [loadingFinished, setLoadingFinished] = useState(false);
@@ -53,7 +55,7 @@ const QuizCreation = (props: Props) => {
     resolver: zodResolver(quizCreationSchema),
     defaultValues: {
       amount: 3,
-      topic: '',
+      topic: prefilledTopic ?? '',
       type: 'open_ended',
     },
   });
