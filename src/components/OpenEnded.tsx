@@ -34,11 +34,11 @@ const OpenEnded = ({ game }: Props) => {
     return () => {
       clearInterval(interval);
     };
-  }, [hasEnded]);
+  }, [hasEnded, game.timeStarted]);
 
   const currentQuestion = useMemo(() => {
     return game.questions[questionIndex];
-  }, [questionIndex]);
+  }, [game.questions, questionIndex]);
 
   const { mutate: checkAnswer, isPending: isChecking } = useMutation({
     mutationFn: async () => {
@@ -72,14 +72,7 @@ const OpenEnded = ({ game }: Props) => {
         setQuestionIndex((prev) => prev + 1);
       },
     });
-  }, [
-    checkAnswer,
-    toast,
-    isChecking,
-    questionIndex,
-    game.questions.length,
-    blankAnswer,
-  ]);
+  }, [checkAnswer, isChecking, questionIndex, game.questions.length]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

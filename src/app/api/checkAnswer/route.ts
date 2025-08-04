@@ -1,10 +1,10 @@
 import { prisma } from '@/lib/db';
 import { checkAnswerSchema } from '@/schemas/form/quiz';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 import { compareTwoStrings } from 'string-similarity';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { questionId, userAnswer } = checkAnswerSchema.parse(body);

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { quizCreationSchema } from '@/schemas/form/quiz';
 import { ZodError } from 'zod';
 import { GenerateContentResponse, GoogleGenAI, Type } from '@google/genai';
@@ -86,7 +86,7 @@ const getMCQQuestions = async (amount: number, topic: string) => {
 //	"topic": "food",
 //	"type": "mcq"
 //}
-export const POST = async (req: Request) => {
+export const POST = async (req: NextRequest) => {
   try {
     // const session = await getAuthSession();
     // if (!session?.user) {

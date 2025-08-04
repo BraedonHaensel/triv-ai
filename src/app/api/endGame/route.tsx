@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/db';
 import { endGameSchema } from '@/schemas/form/quiz';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { gameId } = endGameSchema.parse(body);
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       message: 'Game ended',
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       {
         message: 'Something went wrong',

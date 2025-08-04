@@ -29,7 +29,7 @@ const MCQ = ({ game }: Props) => {
 
   const currentQuestion = useMemo(() => {
     return game.questions[questionIndex];
-  }, [questionIndex]);
+  }, [game.questions, questionIndex]);
 
   const options = useMemo(() => {
     if (!currentQuestion) return [];
@@ -67,7 +67,7 @@ const MCQ = ({ game }: Props) => {
     return () => {
       clearInterval(interval);
     };
-  }, [hasEnded]);
+  }, [hasEnded, game.timeStarted]);
 
   const handleNext = useCallback(() => {
     if (isChecking) return;
@@ -91,7 +91,6 @@ const MCQ = ({ game }: Props) => {
   }, [
     checkAnswer,
     endGame,
-    toast,
     isChecking,
     questionIndex,
     game.questions.length,

@@ -9,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table';
-import { cn } from '@/lib/utils';
 
 type Props = {
   gameType: GameType;

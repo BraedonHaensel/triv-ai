@@ -3,9 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-type Props = {};
-
-const CustomWordCloud = (props: Props) => {
+const CustomWordCloud = () => {
   const router = useRouter();
   return (
     <div

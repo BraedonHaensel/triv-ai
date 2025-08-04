@@ -18,7 +18,6 @@ const UserAvatar = ({ user }: Props) => {
             alt="profile image"
             referrerPolicy="no-referrer"
           />
-          "
         </div>
       ) : (
         <AvatarFallback>

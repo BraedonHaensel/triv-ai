@@ -11,9 +11,7 @@ import { getAuthSession } from '@/lib/nextauth';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-type Props = {};
-
-const RecentActivities = async (props: Props) => {
+const RecentActivities = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
     return redirect('/');
@@ -26,7 +24,9 @@ const RecentActivities = async (props: Props) => {
     <Card className="col-span-4 lg:col-span-3">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Recent Activities</CardTitle>
-        <CardDescription>You have played a total of 7 games.</CardDescription>
+        <CardDescription>
+          You have played a total of {gameCount} games.
+        </CardDescription>
       </CardHeader>
       <CardContent className="max-h-[580px] overflow-scroll">
         <HistoryComponent limit={10} userId={session.user.id} />

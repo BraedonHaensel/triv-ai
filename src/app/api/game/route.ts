@@ -1,12 +1,12 @@
 import { getAuthSession } from '@/lib/nextauth';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { quizCreationSchema } from '@/schemas/form/quiz';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/db';
 import axios from 'axios';
 
 // /api/game
-export async function POST(req: Request, res: Response) {
+export async function POST(req: NextRequest) {
   try {
     const session = await getAuthSession();
     if (!session?.user) {
@@ -40,7 +40,7 @@ export async function POST(req: Request, res: Response) {
         option2: string;
         option3: string;
       };
-      let manyData = data.questions.map((question: mcqQuestion) => {
+      const manyData = data.questions.map((question: mcqQuestion) => {
         let options = [
           question.answer,
           question.option1,
@@ -64,7 +64,7 @@ export async function POST(req: Request, res: Response) {
         question: string;
         answer: string;
       };
-      let manyData = data.questions.map((question: openQuestion) => {
+      const manyData = data.questions.map((question: openQuestion) => {
         return {
           question: question.question,
           answer: question.answer,

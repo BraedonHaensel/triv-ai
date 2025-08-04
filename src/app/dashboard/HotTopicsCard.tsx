@@ -8,9 +8,7 @@ import {
 } from '@/components/ui/card';
 import React from 'react';
 
-type Props = {};
-
-const HotTopicsCard = (props: Props) => {
+const HotTopicsCard = () => {
   return (
     <Card className="col-span-4">
       <CardHeader>

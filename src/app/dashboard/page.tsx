@@ -6,13 +6,11 @@ import HistoryCard from './HistoryCard';
 import HotTopicsCard from './HotTopicsCard';
 import RecentActivities from './RecentActivities';
 
-type Props = {};
-
 export const metadata = {
   title: 'Dashboard | TrivAI',
 };
 
-const Dashboard = async (props: Props) => {
+const Dashboard = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
     return redirect('/');

@@ -7,9 +7,7 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 import HistoryComponent from '@/components/HistoryCard';
 
-type Props = {};
-
-const HistoryPage = async (props: Props) => {
+const HistoryPage = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
     return redirect('/');
