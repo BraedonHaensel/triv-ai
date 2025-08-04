@@ -1,8 +1,39 @@
-Run:
+## 🛠️ Development Setup
 
-1. npm install
-2. npm run dev
-3. Open link
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/BraedonHaensel/triv-ai.git
+   ```
+
+2. Install the dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Create the `.env` file from the template
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Populate the `.env` file with the [environment variable values](https://app.netlify.com/projects/trivai/configuration/env)
+   - 💡For information about each variable, see [Environment Variables](#-environment-variables)
+
+5. Run the development server
+
+   ```bash
+   npm run dev
+   ```
+
+## 🚀 Deployment
+
+Deployed via [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
+
+## 🧩 Recommended Extensions
+
+- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 Code formatting:
 
@@ -65,7 +96,26 @@ Storyset
 - Edit with https://ezgif.com/
 - Remove background with https://www.unscreen.com/upload
 
-PowerShell Permissions Error:
+PowerShell Permissions Issues:
 
 1. Run PowerShell as administrator
 2. Set-ExecutionPolicy RemoteSigned
+3. Right click VS Code shortcut > Properties > Compatibility
+4. Check "Run this program as an administrator"
+5. Relaunch VS Code
+
+Emojis:
+
+- https://gist.github.com/roachhd/1f029bd4b50b8a524f3c
+
+## 🌱 Environment Variables
+
+| Variable             | Description                               | Origin                                                                 |
+| -------------------- | ----------------------------------------- | ---------------------------------------------------------------------- |
+| API_URL              | Base URL for API requests                 | Dev: `http://localhost:3000/` <br> Prod: `https://trivai.netlify.app/` |
+| DATABASE_URL         | Prisma PostgreSQL database connection URL | [Prisma Console](https://console.prisma.io/)                           |
+| GOOGLE_CLIENT_ID     | Google OAuth 2.0 Client ID                | [Google Cloud Console](https://console.cloud.google.com/)              |
+| GOOGLE_CLIENT_SECRET | Google OAuth 2.0 Client Secret            | [Google Cloud Console](https://console.cloud.google.com/)              |
+| GEMINI_API_KEY       | API key for Google Gemini AI              | [Google AI Studio](https://aistudio.google.com/)                       |
+| NEXTAUTH_SECRET      | Secret used by NextAuth.js for encryption | Generate via: `npx auth secret`                                        |
+| NEXTAUTH_URL         | Base URL for NextAuth.js                  | Dev: `http://localhost:3000/` <br> Prod: `https://trivai.netlify.app/` |
