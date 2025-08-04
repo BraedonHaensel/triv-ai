@@ -7,5 +7,9 @@
     "/": "${workspaceFolder}/public"
   },
   "files.insertFinalNewline": true,
-  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" }
+  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" },
+  "workbench.editor.customLabels.patterns": {
+    "**/route.ts": "${dirname}/${filename}.${extname}", // route.ts
+    "**/page.tsx": "${dirname}/${filename}.${extname}" // layout.tsx, page.tsx, template.tsx
+  }
 }
