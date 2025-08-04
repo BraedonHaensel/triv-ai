@@ -43,7 +43,7 @@ const MCQ = ({ game }: Props) => {
         questionId: currentQuestion.id,
         userAnswer: options[selectedChoice],
       };
-      const response = await axios.post('/api/checkAnswer', payload);
+      const response = await axios.post('/api/check-answer', payload);
       return response.data;
     },
   });
@@ -53,7 +53,7 @@ const MCQ = ({ game }: Props) => {
       const payload: z.infer<typeof endGameSchema> = {
         gameId: game.id,
       };
-      const response = await axios.post(`/api/endGame`, payload);
+      const response = await axios.post(`/api/end-game`, payload);
       return response.data;
     },
   });
@@ -88,13 +88,7 @@ const MCQ = ({ game }: Props) => {
         setQuestionIndex((prev) => prev + 1);
       },
     });
-  }, [
-    checkAnswer,
-    endGame,
-    isChecking,
-    questionIndex,
-    game.questions.length,
-  ]);
+  }, [checkAnswer, endGame, isChecking, questionIndex, game.questions.length]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

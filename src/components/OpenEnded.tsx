@@ -53,7 +53,7 @@ const OpenEnded = ({ game }: Props) => {
         questionId: currentQuestion.id,
         userAnswer: filledAnswer,
       };
-      const response = await axios.post('/api/checkAnswer', payload);
+      const response = await axios.post('/api/check-answer', payload);
       return response.data;
     },
   });
