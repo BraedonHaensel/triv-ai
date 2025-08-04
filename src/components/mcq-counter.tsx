@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from './ui/card';
+import { Card } from '@/components/ui/card';
 import { CheckCircle2, XCircle } from 'lucide-react';
-import { Separator } from './ui/separator';
+import { Separator } from '@/components/ui/separator';
 
 type Props = {
   correctAnswers: number;

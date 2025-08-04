@@ -1,7 +1,7 @@
-import AccuracyCard from '@/components/statistics/AccuracyCard';
-import QuestionList from '@/components/statistics/QuestionList';
-import ResultsCard from '@/components/statistics/ResultsCard';
-import TimeTakenCard from '@/components/statistics/TimeTakenCard';
+import AccuracyCard from '@/components/statistics/accuracy-card';
+import QuestionList from '@/components/statistics/question-list';
+import ResultsCard from '@/components/statistics/results-card';
+import TimeTakenCard from '@/components/statistics/time-taken-card';
 import { buttonVariants } from '@/components/ui/button';
 import { prisma } from '@/lib/db';
 import { getAuthSession } from '@/lib/nextauth';

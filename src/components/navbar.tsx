@@ -1,9 +1,9 @@
 import { getAuthSession } from '@/lib/nextauth';
 import Link from 'next/link';
 import React from 'react';
-import SignInButton from './SignInButton';
-import UserAccountNav from './UserAccountNav';
-import { ThemeToggle } from './ThemeToggle';
+import SignInButton from '@/components/sign-in-button';
+import UserAccountNav from '@/components/user-account-nav';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const Navbar = async () => {
   const session = await getAuthSession();

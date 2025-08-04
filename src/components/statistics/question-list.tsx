@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../ui/table';
+} from '@/components/ui/table';
 
 type Props = {
   gameType: GameType;

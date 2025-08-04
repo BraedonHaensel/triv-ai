@@ -1,4 +1,4 @@
-import HistoryComponent from '@/components/HistoryCard';
+import HistoryComponent from '@/components/history-card';
 import {
   Card,
   CardContent,

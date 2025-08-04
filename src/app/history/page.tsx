@@ -5,7 +5,7 @@ import { LucideLayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
-import HistoryComponent from '@/components/HistoryCard';
+import HistoryComponent from '@/components/history-card';
 
 const HistoryPage = async () => {
   const session = await getAuthSession();

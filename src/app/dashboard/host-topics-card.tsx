@@ -1,4 +1,4 @@
-import CustomWordCloud from '@/components/CustomWordCloud';
+import CustomWordCloud from '@/components/custon-word-cloud';
 import {
   Card,
   CardContent,

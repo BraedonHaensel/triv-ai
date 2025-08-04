@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Progress } from './ui/progress';
+import { Progress } from '@/components/ui/progress';
 import { shuffledArray } from '@/lib/utils';
 import { useIsDarkMode } from '@/lib/theme';
 

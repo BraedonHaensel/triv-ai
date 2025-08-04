@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from './ui/card';
+} from '@/components/ui/card';
 import { useForm } from 'react-hook-form';
 import { quizCreationSchema } from '@/schemas/form/quiz';
 import z from 'zod';
@@ -20,15 +20,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form';
-import { Button } from './ui/button';
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { BookOpen, CopyCheck } from 'lucide-react';
-import { Separator } from './ui/separator';
+import { Separator } from '@/components/ui/separator';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import LoadingQuestions from './LoadingQuestions';
+import LoadingQuestions from '@/components/loading-questions';
 
 type Props = {
   prefilledTopic?: string;

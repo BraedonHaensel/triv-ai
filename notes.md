@@ -29,7 +29,9 @@
 
 ## 🚀 Deployment
 
-Deployed via [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
+Deployed via [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/).
+
+Toggle continuous deployment via the [Build and deploy settings](https://app.netlify.com/projects/trivai/configuration/deploys#continuous-deployment).
 
 ## 🧩 Recommended Extensions
 

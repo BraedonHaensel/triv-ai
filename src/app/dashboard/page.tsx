@@ -1,10 +1,10 @@
 import { getAuthSession } from '@/lib/nextauth';
 import { redirect } from 'next/navigation';
 import React from 'react';
-import QuizMeCard from './QuizMeCard';
-import HistoryCard from './HistoryCard';
-import HotTopicsCard from './HotTopicsCard';
-import RecentActivities from './RecentActivities';
+import QuizMeCard from './quiz-me-card';
+import HistoryCard from './history-card';
+import HotTopicsCard from './host-topics-card';
+import RecentActivities from './recent-activities';
 
 export const metadata = {
   title: 'Dashboard | TrivAI',
