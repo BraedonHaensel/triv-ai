@@ -13,7 +13,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import MCQCounter from '@/components/mcq-counter';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { checkAnswerSchema, endGameSchema } from '@/schemas/form/quiz';
+import { checkAnswerSchema, endGameSchema } from '@/schemas/quiz';
 import z from 'zod';
 import { toast } from 'sonner';
 import Link from 'next/link';

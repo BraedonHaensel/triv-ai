@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useForm } from 'react-hook-form';
-import { quizCreationSchema } from '@/schemas/form/quiz';
+import { quizCreationSchema } from '@/schemas/quiz';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {

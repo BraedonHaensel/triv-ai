@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { useMutation } from '@tanstack/react-query';
 import z from 'zod';
-import { checkAnswerSchema } from '@/schemas/form/quiz';
+import { checkAnswerSchema } from '@/schemas/quiz';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { differenceInSeconds } from 'date-fns';

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { quizCreationSchema } from '@/schemas/form/quiz';
+import { quizCreationSchema } from '@/schemas/quiz';
 import { ZodError } from 'zod';
 import { GenerateContentResponse, GoogleGenAI, Type } from '@google/genai';
 
