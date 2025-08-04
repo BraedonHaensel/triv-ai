@@ -22,8 +22,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, 'min-h-screen pt-16 antialiased')}>
         <Providers>
-          <Navbar />
-          {children}
+          <header>
+            <div className="fixed inset-x-0 top-0 z-[10] h-fit border-b border-zinc-300 bg-white py-2 dark:bg-gray-950">
+              <div className="mx-auto max-w-7xl px-8">
+                <Navbar />
+              </div>
+            </div>
+          </header>
+          <main>
+            <div className="mx-auto max-w-7xl p-8">{children}</div>
+          </main>
           <Toaster position="top-center" />
         </Providers>
       </body>

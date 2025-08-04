@@ -28,7 +28,7 @@ const StatisticsPage = async ({ params }: Props) => {
     include: { questions: true },
   });
   if (!game) {
-    return redirect('/quiz');
+    return redirect('/create');
   }
 
   let accuracy: number = 0;
@@ -47,27 +47,25 @@ const StatisticsPage = async ({ params }: Props) => {
 
   return (
     <>
-      <div className="mx-auto max-w-7xl p-8">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Statistics</h2>
-          <div className="flex items-center space-x-2">
-            <Link href="/dashboard" className={buttonVariants()}>
-              <LucideLayoutDashboard className="mr-2" />
-              Back to Dashboard
-            </Link>
-          </div>
+      <div className="flex items-center justify-between space-y-2">
+        <h2 className="text-3xl font-bold tracking-tight">Statistics</h2>
+        <div className="flex items-center space-x-2">
+          <Link href="/dashboard" className={buttonVariants()}>
+            <LucideLayoutDashboard className="mr-2" />
+            Back to Dashboard
+          </Link>
         </div>
-
-        <div className="xs:grid-cols-6 mt-4 grid gap-4 md:grid-cols-12">
-          <ResultsCard accuracy={accuracy} />
-          <AccuracyCard accuracy={accuracy} />
-          <TimeTakenCard
-            timeStarted={game.timeStarted}
-            timeEnded={game.timeEnded ?? new Date()}
-          />
-        </div>
-        <QuestionList gameType={game.gameType} questions={game.questions} />
       </div>
+
+      <div className="xs:grid-cols-6 mt-4 grid gap-4 md:grid-cols-12">
+        <ResultsCard accuracy={accuracy} />
+        <AccuracyCard accuracy={accuracy} />
+        <TimeTakenCard
+          timeStarted={game.timeStarted}
+          timeEnded={game.timeEnded ?? new Date()}
+        />
+      </div>
+      <QuestionList gameType={game.gameType} questions={game.questions} />
     </>
   );
 };

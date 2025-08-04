@@ -8,7 +8,7 @@ const CustomWordCloud = () => {
   return (
     <div
       onClick={() => {
-        router.push(`/quiz?topic=${'presidents'}`);
+        router.push(`/create?topic=${'presidents'}`);
       }}
     >
       Make this a suggested topics page instead

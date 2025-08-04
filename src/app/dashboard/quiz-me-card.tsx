@@ -10,7 +10,7 @@ const QuizMeCard = () => {
   return (
     <Card
       className="hover:cursor-pointer hover:opacity-75"
-      onClick={() => router.push('/quiz')}
+      onClick={() => router.push('/create')}
     >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-bold">Quiz Me!</CardTitle>

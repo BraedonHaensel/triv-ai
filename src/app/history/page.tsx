@@ -29,7 +29,6 @@ const HistoryPage = async () => {
       </Card>
     </div>
   );
-  return <div>app</div>;
 };
 
 export default HistoryPage;

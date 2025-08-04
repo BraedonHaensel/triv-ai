@@ -3,24 +3,21 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 import QuizMeCard from './quiz-me-card';
 import HistoryCard from './history-card';
-import HotTopicsCard from './host-topics-card';
+import HotTopicsCard from './hot-topics-card';
 import RecentActivities from './recent-activities';
 
 export const metadata = {
   title: 'Dashboard | TrivAI',
 };
 
-const Dashboard = async () => {
+const DashboardPage = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
     return redirect('/');
   }
   return (
-    <main className="max-w-7x1 mx-auto p-8">
-      <div className="flex items-center">
-        <h2 className="mr-2 text-3xl font-bold tracking-tight"></h2>
-      </div>
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+    <>
+      <div className="grid gap-4 md:grid-cols-2">
         <QuizMeCard />
         <HistoryCard />
       </div>
@@ -28,10 +25,8 @@ const Dashboard = async () => {
         <HotTopicsCard />
         <RecentActivities />
       </div>
-    </main>
+    </>
   );
-
-  return <div>page</div>;
 };
 
-export default Dashboard;
+export default DashboardPage;

@@ -33,7 +33,7 @@ const MCQPage = async ({ params }: Props) => {
     },
   });
   if (!game || game.gameType !== 'mcq') {
-    return redirect('/quiz');
+    return redirect('/create');
   }
   return <MCQ game={game} />;
 };

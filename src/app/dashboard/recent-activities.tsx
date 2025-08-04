@@ -28,7 +28,7 @@ const RecentActivities = async () => {
           You have played a total of {gameCount} games.
         </CardDescription>
       </CardHeader>
-      <CardContent className="max-h-[580px] overflow-scroll">
+      <CardContent className="max-h-[500px] overflow-scroll">
         <HistoryComponent limit={10} userId={session.user.id} />
       </CardContent>
     </Card>
