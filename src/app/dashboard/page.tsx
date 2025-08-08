@@ -21,7 +21,7 @@ const DashboardPage = async () => {
         <QuizMeCard />
         <HistoryCard />
       </div>
-      <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <div className="mt-4 grid gap-4 md:grid-cols-6 lg:grid-cols-12">
         <HotTopicsCard />
         <RecentActivities />
       </div>

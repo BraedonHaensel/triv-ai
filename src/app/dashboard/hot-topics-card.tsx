@@ -1,4 +1,4 @@
-import CustomWordCloud from '@/components/custon-word-cloud';
+import HotTopics from '@/components/hot-topics-table';
 import {
   Card,
   CardContent,
@@ -10,7 +10,7 @@ import React from 'react';
 
 const HotTopicsCard = () => {
   return (
-    <Card className="col-span-4">
+    <Card className="col-span-6">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Hot Topics</CardTitle>
         <CardDescription>
@@ -18,8 +18,8 @@ const HotTopicsCard = () => {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="pl-2">
-        <CustomWordCloud />
+      <CardContent>
+        <HotTopics />
       </CardContent>
     </Card>
   );

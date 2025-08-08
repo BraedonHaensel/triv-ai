@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const CustomWordCloud = () => {
+const HotTopics = () => {
   const router = useRouter();
   return (
     <div
@@ -11,9 +11,11 @@ const CustomWordCloud = () => {
         router.push(`/create?topic=${'presidents'}`);
       }}
     >
-      Make this a suggested topics page instead
+      <p className="hover: text-sm hover:cursor-pointer hover:opacity-75">
+        Food
+      </p>
     </div>
   );
 };
 
-export default CustomWordCloud;
+export default HotTopics;
