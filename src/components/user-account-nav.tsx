@@ -24,12 +24,15 @@ const UserAccountNav = ({ user }: Props) => {
       <DropdownMenuTrigger className="focus:outline-none">
         <UserAvatar user={user} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white" align="end">
+      <DropdownMenuContent
+        className="bg-card max-w-[min(400px,100vw)]"
+        align="end"
+      >
         <div className="flex items-center justify-start gap-2 p-2">
-          <div className="flex flex-col space-y-1 leading-none">
-            {user.name && <p className="font-medium">{user.name}</p>}
+          <div className="flex w-full flex-col space-y-1 leading-none">
+            {user.name && <p className="truncate font-medium">{user.name}</p>}
             {user.email && (
-              <p className="w-[200px] truncate text-sm text-zinc-700">
+              <p className="text-muted-foreground truncate text-sm">
                 {user.email}
               </p>
             )}
@@ -37,11 +40,7 @@ const UserAccountNav = ({ user }: Props) => {
         </div>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/">Foobar</Link>
-        </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={(e) => {
             e.preventDefault();

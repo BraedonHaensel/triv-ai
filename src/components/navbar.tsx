@@ -8,7 +8,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 const Navbar = async () => {
   const session = await getAuthSession();
   return (
-    <div className="flex h-full items-center justify-between">
+    <div className="flex h-full items-center justify-between gap-3">
       {/* Site logo */}
       <Link
         href="/"
