@@ -9,7 +9,7 @@ type Props = {
 
 const UserAvatar = ({ user }: Props) => {
   return (
-    <Avatar>
+    <Avatar className="hover:cursor-pointer hover:opacity-75">
       {user.image ? (
         <div className="relative aspect-square h-full w-full">
           <Image

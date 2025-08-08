@@ -12,7 +12,7 @@ const Navbar = async () => {
       {/* Site logo */}
       <Link
         href="/"
-        className="rounded-lg border-2 border-r-4 border-b-4 border-black px-2 py-1 transition-all hover:-translate-y-[2px] md:block dark:border-white"
+        className="rounded-lg border-2 border-r-4 border-b-4 border-black px-2 py-1 hover:cursor-pointer hover:opacity-75 dark:border-white"
       >
         <p className="text-xl font-bold">TrivAI</p>
       </Link>

@@ -42,14 +42,14 @@ const UserAccountNav = ({ user }: Props) => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem
+          variant="destructive"
           onClick={(e) => {
             e.preventDefault();
             signOut().catch(console.error);
           }}
-          className="cursor-pointer text-red-600"
         >
           Sign Out
-          <LogOut className="h-4 w-4 text-inherit" />
+          <LogOut />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
