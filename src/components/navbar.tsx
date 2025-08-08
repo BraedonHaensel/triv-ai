@@ -8,8 +8,8 @@ import { ThemeToggle } from '@/components/theme-toggle';
 const Navbar = async () => {
   const session = await getAuthSession();
   return (
-    <div className="flex h-full items-center justify-between gap-2">
-      {/* Logo */}
+    <div className="flex h-full items-center justify-between">
+      {/* Site logo */}
       <Link
         href="/"
         className="rounded-lg border-2 border-r-4 border-b-4 border-black px-2 py-1 transition-all hover:-translate-y-[2px] md:block dark:border-white"
