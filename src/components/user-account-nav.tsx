@@ -9,7 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { LogOut } from 'lucide-react';
 import UserAvatar from '@/components/user-avatar';
