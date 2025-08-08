@@ -25,11 +25,11 @@ export default function RootLayout({
           <div
             className={cn(
               inter.className,
-              'min-h-screen min-w-[320px] pt-15 antialiased'
+              'min-h-screen min-w-[320px] antialiased'
             )}
           >
             <header>
-              <div className="fixed inset-x-0 top-0 z-[10] h-15 border-b border-zinc-300 bg-white py-2 dark:bg-gray-950">
+              <div className="h-15 w-full border-b border-zinc-300 bg-white py-2 dark:bg-gray-950">
                 <div className="mx-auto h-full max-w-7xl px-8">
                   <Navbar />
                 </div>
