@@ -21,7 +21,7 @@ type Props = {
 const UserAccountNav = ({ user }: Props) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="focus:outline-none">
         <UserAvatar user={user} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-white" align="end">
