@@ -29,6 +29,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import LoadingQuestions from '@/components/loading-questions';
+import { toast } from 'sonner';
 
 type Props = {
   prefilledTopic?: string;
@@ -40,6 +41,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
   const router = useRouter();
   const [showLoader, setShowLoader] = useState(false);
   const [loadingFinished, setLoadingFinished] = useState(false);
+
   const { mutate: getQuestions, isPending } = useMutation({
     mutationFn: async ({ amount, topic, type }: Input) => {
       const response = await axios.post('/api/game', {
@@ -81,6 +83,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
         },
         onError: (error) => {
           console.error(error);
+          toast.error('Quiz creation failed. Please try again.');
           setShowLoader(false);
         },
       }

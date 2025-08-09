@@ -38,7 +38,14 @@ export default function RootLayout({
             <main>
               <div className="mx-auto max-w-7xl p-8">{children}</div>
             </main>
-            <Toaster position="top-center" />
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                classNames: {
+                  error: '!bg-red-300 !border-red-300',
+                },
+              }}
+            />
           </div>
         </Providers>
       </body>
