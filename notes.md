@@ -120,6 +120,6 @@ Emojis:
 | DATABASE_URL         | Prisma PostgreSQL database connection URL | [Prisma Console](https://console.prisma.io/)                           |
 | GOOGLE_CLIENT_ID     | Google OAuth 2.0 Client ID                | [Google Cloud Console](https://console.cloud.google.com/)              |
 | GOOGLE_CLIENT_SECRET | Google OAuth 2.0 Client Secret            | [Google Cloud Console](https://console.cloud.google.com/)              |
-| GEMINI_API_KEY       | API key for Google Gemini AI              | [Google AI Studio](https://aistudio.google.com/)                       |
+| GEMINI_API_KEY       | API key for Google Gemini AI              | [Google AI Studio](https://aistudio.google.com/apikey)                 |
 | NEXTAUTH_SECRET      | Secret used by NextAuth.js for encryption | Generate via: `npx auth secret`                                        |
 | NEXTAUTH_URL         | Base URL for NextAuth.js                  | Dev: `http://localhost:3000/` <br> Prod: `https://trivai.netlify.app/` |
