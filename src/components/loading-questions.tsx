@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { shuffledArray } from '@/lib/utils';
-import { useIsDarkMode } from '@/lib/theme';
+import { useIsDarkMode } from '@/contexts/is-dark-mode';
 
 type Props = { finished: boolean };
 
