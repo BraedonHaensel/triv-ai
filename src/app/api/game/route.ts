@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { quizCreationSchema } from '@/schemas/quiz';
 import { ZodError } from 'zod';
 import { prisma } from '@/lib/db';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 // /api/game
 export async function POST(req: NextRequest) {
@@ -83,10 +83,21 @@ export async function POST(req: NextRequest) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }
+
+    if (error instanceof AxiosError) {
+      console.error(`AxiosError: ${error.message}`);
+      return NextResponse.json(
+        {
+          error: 'AxiosError',
+          message: error.message,
+        },
+        { status: error.status }
+      );
+    }
+
+    console.error('Unexpected error:', error);
     return NextResponse.json(
-      {
-        error: 'Something went wrong',
-      },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

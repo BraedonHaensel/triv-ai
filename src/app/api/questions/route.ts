@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { quizCreationSchema } from '@/schemas/quiz';
 import { ZodError } from 'zod';
-import { GenerateContentResponse, GoogleGenAI, Type } from '@google/genai';
+import {
+  ApiError,
+  GenerateContentResponse,
+  GoogleGenAI,
+  Type,
+} from '@google/genai';
 
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
 // Docs: https://ai.google.dev/gemini-api/docs/structured-output#javascript.
@@ -115,10 +120,38 @@ export const POST = async (req: NextRequest) => {
     );
   } catch (error) {
     if (error instanceof ZodError) {
-      return NextResponse.json({
-        error: error.issues,
-        status: 400,
-      });
+      console.error('Zod error:', error.issues);
+      return NextResponse.json({ error: error.issues }, { status: 400 });
     }
+
+    if (error instanceof ApiError) {
+      const message = error.message;
+      try {
+        const parsedError = JSON.parse(message).error;
+        console.error(`GenAI API error: ${parsedError.message}`);
+        return NextResponse.json(
+          {
+            error: 'GenAI API error',
+            message: parsedError.message,
+          },
+          { status: parsedError.code }
+        );
+      } catch {
+        console.error('Failed to parse GenAI API error message:', message);
+        return NextResponse.json(
+          {
+            error: 'GenAI API error',
+            message,
+          },
+          { status: 500 }
+        );
+      }
+    }
+
+    console.error('Unexpected error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 };

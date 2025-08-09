@@ -79,7 +79,8 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
             }
           }, 1000);
         },
-        onError: () => {
+        onError: (error) => {
+          console.error(error);
           setShowLoader(false);
         },
       }
