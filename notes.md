@@ -18,7 +18,7 @@
    cp .env.example .env
    ```
 
-4. Populate the `.env` file with the [environment variable values](https://app.netlify.com/projects/trivai/configuration/env)
+4. Populate the `.env` file with the [environment variable values](https://app.netlify.com/projects/trivai/configuration/env#content)
    - 💡For information about each variable, see [Environment Variables](#-environment-variables)
 
 5. Run the development server
@@ -29,9 +29,11 @@
 
 ## 🚀 Deployment
 
-Deployed via [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/).
+Deployed to Netlify via [continuous deployment](https://app.netlify.com/projects/trivai/configuration/deploys#branches-and-deploy-contexts).
 
-Toggle continuous deployment via the [Build and deploy settings](https://app.netlify.com/projects/trivai/configuration/deploys#continuous-deployment).
+- Ensure the [environment variables](https://app.netlify.com/projects/trivai/configuration/env#content)
+  and [production branch](https://app.netlify.com/projects/trivai/configuration/deploys#branches-and-deploy-contexts)
+  are configured correctly.
 
 ## 🧩 Recommended Extensions
 
