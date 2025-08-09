@@ -119,6 +119,10 @@ export const POST = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
+    console.error('Sample questions route error message');
+    console.log(JSON.stringify(error));
+    console.error(error);
+
     if (error instanceof ZodError) {
       console.error('Zod error:', error.issues);
       return NextResponse.json({ error: error.issues }, { status: 400 });

@@ -83,6 +83,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
         },
         onError: (error) => {
           console.error(error);
+          console.error('Sample error message from quiz-creation');
           toast.error('Quiz creation failed. Please try again.');
           setShowLoader(false);
         },
