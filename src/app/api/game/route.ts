@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     });
     if (type == 'mcq') {
       type mcqQuestion = {
-        question: string;
+        prompt: string;
         answer: string;
         option1: string;
         option2: string;
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
         ];
         options = options.sort(() => Math.random() - 0.5);
         return {
-          question: question.question,
+          prompt: question.prompt,
           answer: question.answer,
           options: JSON.stringify(options),
           gameId: game.id,
@@ -61,12 +61,12 @@ export async function POST(req: NextRequest) {
       });
     } else if (type === 'open_ended') {
       type openQuestion = {
-        question: string;
+        prompt: string;
         answer: string;
       };
       const manyData = data.questions.map((question: openQuestion) => {
         return {
-          question: question.question,
+          prompt: question.prompt,
           answer: question.answer,
           gameId: game.id,
           questionType: 'open_ended',

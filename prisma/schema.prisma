@@ -74,7 +74,7 @@ model Game {
 
 model Question {
   id                String   @id @default(cuid())
-  question          String
+  prompt            String
   answer            String
   gameId            String
   options           Json? // mcq only

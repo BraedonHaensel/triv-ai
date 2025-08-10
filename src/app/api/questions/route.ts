@@ -25,14 +25,14 @@ const getOpenEndedQuestions = async (amount: number, topic: string) => {
         items: {
           type: Type.OBJECT,
           properties: {
-            question: {
+            prompt: {
               type: Type.STRING,
             },
             answer: {
               type: Type.STRING,
             },
           },
-          propertyOrdering: ['question', 'answer'],
+          propertyOrdering: ['prompt', 'answer'],
         },
       },
     },
@@ -53,7 +53,7 @@ const getMCQQuestions = async (amount: number, topic: string) => {
         items: {
           type: Type.OBJECT,
           properties: {
-            question: {
+            prompt: {
               type: Type.STRING,
             },
             answer: {
@@ -70,7 +70,7 @@ const getMCQQuestions = async (amount: number, topic: string) => {
             },
           },
           propertyOrdering: [
-            'question',
+            'prompt',
             'answer',
             'option1',
             'option2',

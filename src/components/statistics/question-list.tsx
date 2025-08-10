@@ -36,7 +36,7 @@ const QuestionList = ({ gameType, questions }: Props) => {
               <TableRow key={question.id}>
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
-                  {question.question}
+                  {question.prompt}
                   <br />
                   <br />
                   <span className="font-semibold">{question.answer}</span>

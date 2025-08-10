@@ -1,8 +1,8 @@
 'use client';
 
 import { Game, Question } from '@/generated/prisma';
-import { BarChart, ChevronRight, LoaderCircle, Timer } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { BarChart, Check, LoaderCircle, Timer, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Card,
   CardDescription,
@@ -19,18 +19,21 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 import { cn, formatTimeDelta } from '@/lib/utils';
 import { differenceInSeconds } from 'date-fns';
+import { Separator } from '@/components/ui/separator';
 
 type Props = {
-  game: Game & { questions: Pick<Question, 'id' | 'options' | 'question'>[] };
+  game: Game & { questions: Pick<Question, 'id' | 'prompt' | 'options'>[] };
 };
 
 const MCQ = ({ game }: Props) => {
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [selectedChoice, setSelectedChoice] = useState(0);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [hasEnded, setHasEnded] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
 
   const currentQuestion = useMemo(() => {
     return game.questions[questionIndex];
@@ -46,7 +49,7 @@ const MCQ = ({ game }: Props) => {
     mutationFn: async () => {
       const payload: z.infer<typeof checkAnswerSchema> = {
         questionId: currentQuestion.id,
-        userAnswer: options[selectedChoice],
+        userAnswer: options[selectedOptionIndex],
       };
       const response = await axios.post('/api/check-answer', payload);
       return response.data;
@@ -74,35 +77,47 @@ const MCQ = ({ game }: Props) => {
     };
   }, [hasEnded, game.timeStarted]);
 
-  const handleNext = useCallback(() => {
-    if (isChecking) return;
+  const handleSelection = (optionIndex: number) => {
+    if (isChecking || isAnswered) {
+      return;
+    }
+    setSelectedOptionIndex(optionIndex);
     checkAnswer(undefined, {
-      onSuccess: ({ isCorrect }) => {
+      onSuccess: ({ isCorrect, correctAnswer }) => {
         if (isCorrect) {
-          toast.success('Correct!');
-          setCorrectAnswers((prev) => prev + 1);
+          setCorrectCount((prev) => prev + 1);
         } else {
-          toast.error('Wrong answer!');
-          setWrongAnswers((prev) => prev + 1);
+          setWrongCount((prev) => prev + 1);
         }
-        if (questionIndex === game.questions.length - 1) {
-          endGame();
-          setHasEnded(true);
-          return;
-        }
-        setQuestionIndex((prev) => prev + 1);
+        setCorrectAnswer(correctAnswer);
+        setIsAnswered(true);
+        setTimeout(
+          () => {
+            if (questionIndex === game.questions.length - 1) {
+              endGame();
+              setHasEnded(true);
+              return;
+            }
+            setQuestionIndex((prev) => prev + 1);
+            setIsAnswered(false);
+            setCorrectAnswer(null);
+          },
+          isCorrect ? 1000 : 1500
+        );
+      },
+      onError: (error) => {
+        console.error(error);
+        toast.error('Failed to check answer. Please try again.');
       },
     });
-  }, [checkAnswer, endGame, isChecking, questionIndex, game.questions.length]);
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const { key } = event;
 
       if (/^[1-4]$/.test(key)) {
-        setSelectedChoice(Number(key) - 1);
-      } else if (key === 'Enter') {
-        handleNext();
+        handleSelection(Number(key) - 1);
       }
     };
 
@@ -110,7 +125,7 @@ const MCQ = ({ game }: Props) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleNext]);
+  }, [handleSelection]);
 
   if (hasEnded) {
     return (
@@ -145,50 +160,64 @@ const MCQ = ({ game }: Props) => {
             {formatTimeDelta(elapsedTime)}
           </div>
         </div>
-        <MCQCounter
-          correctAnswers={correctAnswers}
-          wrongAnswers={wrongAnswers}
-        />
+        <MCQCounter correctAnswers={correctCount} wrongAnswers={wrongCount} />
       </div>
 
       <Card className="mt-4 w-full">
         <CardHeader className="flex flex-row items-center">
-          <CardTitle className="mr-5 divide-y divide-zinc-600/50 text-center">
+          <CardTitle className="text-muted-foreground mr-5 items-center text-center">
             <div>{questionIndex + 1}</div>
-            <div className="text-base text-slate-400">
-              {game.questions.length}
-            </div>
+            <Separator className="bg-muted-foreground my-1" />
+            <div>{game.questions.length}</div>
           </CardTitle>
-          <CardDescription className="flex-grow text-lg">
-            {currentQuestion.question}
+          <CardDescription className="text-primary flex-grow text-lg">
+            {currentQuestion.prompt}
           </CardDescription>
         </CardHeader>
       </Card>
 
-      <div className="mt-4 flex w-full flex-col items-center justify-center">
+      <div className="mt-4 flex w-full flex-col items-center justify-center space-y-4">
         {options.map((option, index) => {
           return (
             <Button
               key={index}
-              className="mb-4 w-full justify-start py-8"
-              variant={selectedChoice === index ? 'default' : 'secondary'}
+              variant="secondary"
+              className={`border-secondary hover:bg-secondary w-full border-5 py-8 hover:cursor-pointer ${
+                !isAnswered && 'hover:opacity-65'
+              } ${
+                isChecking && index === selectedOptionIndex && 'opacity-65'
+              } ${
+                isAnswered &&
+                (option === correctAnswer
+                  ? 'border-green-400'
+                  : index === selectedOptionIndex && 'border-red-400')
+              }`}
               onClick={() => {
-                setSelectedChoice(index);
+                handleSelection(index);
               }}
             >
-              <div className="flex items-center justify-start">
-                <div className="mr-5 rounded-md border p-2 px-3">
-                  {index + 1}
+              <div className="flex w-full items-center justify-between">
+                <div className="flex items-center justify-start">
+                  <div className="mr-5 rounded-md border p-2 px-3">
+                    {index + 1}
+                  </div>
+                  <div className="text-start">{option}</div>
                 </div>
-                <div className="text-start">{option}</div>
+                {index === selectedOptionIndex && isChecking && (
+                  <LoaderCircle className="!h-7 !w-7 animate-spin" />
+                )}
+                {isAnswered &&
+                  (option === correctAnswer ? (
+                    <Check className="!h-7 !w-7 text-green-600" />
+                  ) : (
+                    index === selectedOptionIndex && (
+                      <X className="!h-7 !w-7 text-red-600" />
+                    )
+                  ))}
               </div>
             </Button>
           );
         })}
-        <Button className="mt-2" onClick={handleNext} disabled={isChecking}>
-          {isChecking && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
-          Next <ChevronRight className="ml-2 h-4 w-4" />
-        </Button>
       </div>
     </div>
   );

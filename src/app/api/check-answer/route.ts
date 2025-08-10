@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           isCorrect,
+          correctAnswer: question.answer,
         },
         { status: 200 }
       );

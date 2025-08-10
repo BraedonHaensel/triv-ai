@@ -26,7 +26,7 @@ const MCQPage = async ({ params }: Props) => {
       questions: {
         select: {
           id: true,
-          question: true,
+          prompt: true,
           options: true,
         },
       },

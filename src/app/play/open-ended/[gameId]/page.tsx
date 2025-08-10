@@ -26,7 +26,7 @@ const OpenEndedPage = async ({ params }: Props) => {
       questions: {
         select: {
           id: true,
-          question: true,
+          prompt: true,
           answer: true,
         },
       },

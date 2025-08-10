@@ -21,7 +21,7 @@ import BlankAnswerInput, { BLANK } from '@/components/blank-answer-input';
 import Link from 'next/link';
 
 type Props = {
-  game: Game & { questions: Pick<Question, 'id' | 'question' | 'answer'>[] };
+  game: Game & { questions: Pick<Question, 'id' | 'prompt' | 'answer'>[] };
 };
 
 const OpenEnded = ({ game }: Props) => {
@@ -136,7 +136,7 @@ const OpenEnded = ({ game }: Props) => {
             </div>
           </CardTitle>
           <CardDescription className="flex-grow text-lg">
-            {currentQuestion.question}
+            {currentQuestion.prompt}
           </CardDescription>
         </CardHeader>
       </Card>
