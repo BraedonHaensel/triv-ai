@@ -17,7 +17,9 @@ const HistoryCard = () => {
         <History size={28} strokeWidth={2.5} />
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground text-sm">View past quiz attempts</p>
+        <p className="text-muted-foreground text-sm">
+          View past quiz attempts.
+        </p>
       </CardContent>
     </Card>
   );

@@ -93,17 +93,6 @@ const getMCQQuestions = async (amount: number, topic: string) => {
 //}
 export const POST = async (req: NextRequest) => {
   try {
-    // const session = await getAuthSession();
-    // if (!session?.user) {
-    //   return NextResponse.json(
-    //     {
-    //       error: 'You must be logged in to create a quiz',
-    //     },
-    //     {
-    //       status: 401,
-    //     }
-    //   );
-    // }
     const body = await req.json();
     const { amount, topic, type } = quizCreationSchema.parse(body);
     let questions;

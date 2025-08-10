@@ -23,7 +23,7 @@ const RecentActivities = async () => {
   return (
     <Card className="col-span-6">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">Recent Activities</CardTitle>
+        <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
         <CardDescription>
           You have played a total of {gameCount} games.
         </CardDescription>

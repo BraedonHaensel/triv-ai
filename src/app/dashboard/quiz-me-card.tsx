@@ -13,7 +13,7 @@ const QuizMeCard = () => {
       onClick={() => router.push('/create')}
     >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-2xl font-bold">Quiz Me!</CardTitle>
+        <CardTitle className="text-2xl font-bold">Create a Quiz</CardTitle>
         <BrainCircuit size={28} strokeWidth={2.5} />
       </CardHeader>
 

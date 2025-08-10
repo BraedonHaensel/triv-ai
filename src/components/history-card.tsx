@@ -25,7 +25,7 @@ const HistoryComponent = async ({ limit, userId }: Props) => {
               {game.gameType === 'mcq' ? (
                 <CopyCheck className="mr-3" />
               ) : (
-                <Edit2 className="ml-4 space-y-1" />
+                <Edit2 className="mr-3 space-y-1" />
               )}
               <div className="ml-4 space-y-1">
                 <Link

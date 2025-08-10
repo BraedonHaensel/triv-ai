@@ -56,7 +56,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
   const form = useForm<Input>({
     resolver: zodResolver(quizCreationSchema),
     defaultValues: {
-      amount: 3,
+      amount: 5,
       topic: prefilledTopic ?? '',
       type: 'mcq',
     },
