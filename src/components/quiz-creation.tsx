@@ -58,7 +58,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
     defaultValues: {
       amount: 3,
       topic: prefilledTopic ?? '',
-      type: 'open_ended',
+      type: 'mcq',
     },
   });
 
@@ -112,7 +112,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
                 <FormItem>
                   <FormLabel>Topic</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter a topic..." {...field} />
+                    <Input placeholder="Enter any topic..." {...field} />
                   </FormControl>
                   <FormDescription>Please provide a topic</FormDescription>
                   <FormMessage />

@@ -10,7 +10,7 @@ const ResultsCard = ({ accuracy }: Props) => {
   return (
     <Card className="md:col-span-12">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-        <CardTitle className="text-2xl font-bold">Results</CardTitle>
+        <CardTitle className="text-2xl font-bold">Award</CardTitle>
         <Award />
       </CardHeader>
       <CardContent className="flex h-3/5 flex-col items-center justify-center">

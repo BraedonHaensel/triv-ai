@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Check, X } from 'lucide-react';
 
 type Props = {
   gameType: GameType;
@@ -18,11 +19,11 @@ type Props = {
 const QuestionList = ({ gameType, questions }: Props) => {
   return (
     <Table className="mt-4">
-      <TableCaption>End of list.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[10px]">No.</TableHead>
-          <TableHead>Question & Correct Answer</TableHead>
+          <TableHead>Question</TableHead>
+          <TableHead>Correct Answer</TableHead>
           <TableHead>Your Answer</TableHead>
           {gameType === 'open_ended' && (
             <TableHead className="w-[10px] text-right">Accuracy</TableHead>
@@ -35,10 +36,8 @@ const QuestionList = ({ gameType, questions }: Props) => {
             return (
               <TableRow key={question.id}>
                 <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>{question.prompt}</TableCell>
                 <TableCell>
-                  {question.prompt}
-                  <br />
-                  <br />
                   <span className="font-semibold">{question.answer}</span>
                 </TableCell>
                 {questions[0].questionType === 'open_ended' ? (
@@ -48,15 +47,16 @@ const QuestionList = ({ gameType, questions }: Props) => {
                 ) : (
                   <>
                     <TableCell
-                      className={`${
+                      className={`flex justify-between ${
                         question.isCorrect ? 'text-green-600' : 'text-red-600'
                       } font-semibold`}
                     >
                       {question.userAnswer}
+                      {question.isCorrect ? <Check /> : <X />}
                     </TableCell>
-                    <TableCell className="text-right">
+                    {/* <TableCell className="text-right">
                       {question.percentageCorrect}
-                    </TableCell>
+                    </TableCell> */}
                   </>
                 )}
               </TableRow>

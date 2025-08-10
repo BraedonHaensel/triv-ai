@@ -130,7 +130,7 @@ const MCQ = ({ game }: Props) => {
   if (hasEnded) {
     return (
       <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col justify-center">
-        <div className="mt-2 rounded-md bg-green-500 px-4 font-semibold whitespace-nowrap text-white">
+        <div className="mt-2 rounded-md bg-green-400 p-2 font-semibold whitespace-nowrap text-white">
           You finished in {formatTimeDelta(elapsedTime)}!
         </div>
         <Link
