@@ -22,7 +22,7 @@ const SuggestedTopics = () => {
           key={`${topic}-${id}`}
           className="cursor-pointer [@media(max-width:380px)]:text-xs [@media(min-width:760px)_and_(max-width:900px)]:text-xs"
           onClick={() => {
-            router.push(`/create?topic=${topic}`);
+            router.push(`/create?topic=${encodeURIComponent(topic)}`);
           }}
         >
           {topic}

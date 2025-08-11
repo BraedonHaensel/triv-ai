@@ -12,10 +12,14 @@ import {
 // Docs: https://ai.google.dev/gemini-api/docs/structured-output#javascript.
 const ai = new GoogleGenAI({});
 
-const getOpenEndedQuestions = async (amount: number, topic: string) => {
+const getOpenEndedQuestions = async (
+  amount: number,
+  topic: string,
+  difficulty: string
+) => {
   const response: GenerateContentResponse = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
-    contents: `Generate a list of easy pairs of trivia questions and answers about the topic "${topic}. Limit each question to 15 words. Answers should be around 15 words`,
+    contents: `Generate a list of easy pairs of trivia questions and answers about the topic "${topic} with ${difficulty} difficulty. Limit each question to 15 words. Answers should be around 15 words`,
     config: {
       responseMimeType: 'application/json',
       responseSchema: {
@@ -40,10 +44,14 @@ const getOpenEndedQuestions = async (amount: number, topic: string) => {
   return response.text ? JSON.parse(response.text) : [];
 };
 
-const getMCQQuestions = async (amount: number, topic: string) => {
+const getMCQQuestions = async (
+  amount: number,
+  topic: string,
+  difficulty: string
+) => {
   const response: GenerateContentResponse = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
-    contents: `Generate a list of easy sets of multiple choice trivia questions and answers about the topic "${topic}. Limit each question to 15 words. Provide 1 correct answer and 3 wrong options.`,
+    contents: `Generate a list of easy sets of multiple choice trivia questions and answers about the topic "${topic} with ${difficulty} difficulty. Limit each question to 15 words. Provide 1 correct answer and 3 wrong options.`,
     config: {
       responseMimeType: 'application/json',
       responseSchema: {
@@ -94,12 +102,12 @@ const getMCQQuestions = async (amount: number, topic: string) => {
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
-    const { amount, topic, type } = quizCreationSchema.parse(body);
+    const { amount, topic, type, difficulty } = quizCreationSchema.parse(body);
     let questions;
     if (type === 'open_ended') {
-      questions = await getOpenEndedQuestions(amount, topic);
+      questions = await getOpenEndedQuestions(amount, topic, difficulty);
     } else {
-      questions = await getMCQQuestions(amount, topic);
+      questions = await getMCQQuestions(amount, topic, difficulty);
     }
     return NextResponse.json(
       {
