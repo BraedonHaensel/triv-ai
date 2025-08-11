@@ -41,9 +41,14 @@ const QuestionList = ({ gameType, questions }: Props) => {
                   <span className="font-semibold">{question.answer}</span>
                 </TableCell>
                 {questions[0].questionType === 'open_ended' ? (
-                  <TableCell className={`font-semibold`}>
-                    {question.userAnswer}
-                  </TableCell>
+                  <>
+                    <TableCell className={`font-semibold`}>
+                      {question.userAnswer}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {question.percentageCorrect}%
+                    </TableCell>
+                  </>
                 ) : (
                   <>
                     <TableCell
@@ -54,9 +59,6 @@ const QuestionList = ({ gameType, questions }: Props) => {
                       {question.userAnswer}
                       {question.isCorrect ? <Check /> : <X />}
                     </TableCell>
-                    {/* <TableCell className="text-right">
-                      {question.percentageCorrect}
-                    </TableCell> */}
                   </>
                 )}
               </TableRow>
