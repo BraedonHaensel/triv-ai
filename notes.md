@@ -60,6 +60,7 @@ Prisma and PostgreSQL
 
 - For the database
 - npx prisma db push (required after any prisma.schema changes)
+   - Restart npm run dev
 - npx prisma studio (database viewer)
 - npx prisma generate --no-engine
 - https://console.prisma.io/cmdb46yeo003wxj0vbwmvqo2p/overview

@@ -19,7 +19,7 @@ const HistoryPage = async () => {
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl font-bold">History</CardTitle>
             <Link href="/dashboard" className={buttonVariants()}>
-              <LucideLayoutDashboard className="mr-1" />
+              <LucideLayoutDashboard />
               Back to Dashboard
             </Link>
           </div>

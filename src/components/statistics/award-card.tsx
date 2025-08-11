@@ -6,9 +6,9 @@ type Props = {
   accuracy: number;
 };
 
-const ResultsCard = ({ accuracy }: Props) => {
+const AwardCard = ({ accuracy }: Props) => {
   return (
-    <Card className="md:col-span-12">
+    <Card className="md:col-span-6">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <CardTitle className="text-2xl font-bold">Award</CardTitle>
         <Award />
@@ -50,4 +50,4 @@ const ResultsCard = ({ accuracy }: Props) => {
   );
 };
 
-export default ResultsCard;
+export default AwardCard;

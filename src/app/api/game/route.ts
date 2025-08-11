@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
         timeStarted: new Date(),
         userId: session.user.id,
         topic,
+        difficulty,
       },
     });
     const { data } = await axios.post(`${process.env.API_URL}/api/questions`, {

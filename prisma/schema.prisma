@@ -59,12 +59,19 @@ enum GameType {
   open_ended
 }
 
+enum Difficulty {
+  easy
+  medium
+  hard
+}
+
 model Game {
   id          String     @id @default(cuid())
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   gameType    GameType
   topic       String
+  difficulty  Difficulty
   timeStarted DateTime
   timeEnded   DateTime?
   questions   Question[]

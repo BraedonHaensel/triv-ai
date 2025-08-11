@@ -38,8 +38,8 @@ const HistoryComponent = async ({ limit, userId }: Props) => {
                   <Clock className="mr-1 h-4 w-4" />
                   {new Date(game.timeStarted).toLocaleDateString()}
                 </p>
-                <p className="text-muted-foreground text-sm">
-                  {game.gameType === 'mcq' ? 'Multiple Choice' : 'Open-Ended'}
+                <p className="text-muted-foreground text-sm capitalize">
+                  {`${game.gameType === 'mcq' ? 'Multiple Choice' : 'Open-Ended'} - ${game.difficulty}`}
                 </p>
               </div>
             </div>
