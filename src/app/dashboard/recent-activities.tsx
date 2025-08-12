@@ -8,14 +8,29 @@ import {
 } from '@/components/ui/card';
 import { prisma } from '@/lib/db';
 import { getAuthSession } from '@/lib/nextauth';
-import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import React from 'react';
 
 const RecentActivities = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
-    return redirect('/');
+    return (
+      <Card className="col-span-6">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Link
+            href="/"
+            className="text-muted-foreground text-sm hover:underline"
+          >
+            Sign in to view this card.
+          </Link>
+        </CardContent>
+      </Card>
+    );
   }
+
   const gameCount = await prisma.game.count({
     where: { userId: session.user.id },
   });
