@@ -2,6 +2,11 @@ import MCQ from '@/components/mcq';
 import { prisma } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Play | TrivAI',
+};
 
 type Props = {
   params: Promise<{

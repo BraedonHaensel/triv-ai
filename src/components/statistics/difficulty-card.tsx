@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Target } from 'lucide-react';
+import { Axe } from 'lucide-react';
 
 type Props = {
   difficulty: string;
@@ -11,7 +11,7 @@ const DifficultyCard = ({ difficulty }: Props) => {
     <Card className="md:col-span-6">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-bold">Difficulty</CardTitle>
-        <Target />
+        <Axe />
       </CardHeader>
       <CardContent>
         <div className="text-sm font-medium capitalize">{difficulty}</div>

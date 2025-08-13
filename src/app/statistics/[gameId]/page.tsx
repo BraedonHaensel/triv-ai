@@ -9,6 +9,11 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import DifficultyCard from '@/components/statistics/difficulty-card';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Statistics | TrivAI',
+};
 
 type Props = {
   params: Promise<{

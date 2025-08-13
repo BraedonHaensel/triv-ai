@@ -1,8 +1,12 @@
 import OpenEnded from '@/components/open-ended';
 import { prisma } from '@/lib/db';
-import { getAuthSession } from '@/lib/nextauth';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Play | TrivAI',
+};
 
 type Props = {
   params: Promise<{

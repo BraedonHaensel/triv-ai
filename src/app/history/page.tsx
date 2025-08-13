@@ -6,6 +6,11 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import HistoryComponent from '@/components/history-card';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'History | TrivAI',
+};
 
 const HistoryPage = async () => {
   const session = await getAuthSession();
