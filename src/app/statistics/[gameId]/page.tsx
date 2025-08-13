@@ -4,7 +4,6 @@ import ResultsCard from '@/components/statistics/award-card';
 import TimeTakenCard from '@/components/statistics/time-taken-card';
 import { buttonVariants } from '@/components/ui/button';
 import { prisma } from '@/lib/db';
-import { getAuthSession } from '@/lib/nextauth';
 import { LucideLayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -19,10 +18,6 @@ type Props = {
 
 const StatisticsPage = async ({ params }: Props) => {
   const { gameId } = await params;
-  const session = await getAuthSession();
-  if (!session?.user) {
-    return redirect('/');
-  }
 
   const game = await prisma.game.findUnique({
     where: { id: gameId },

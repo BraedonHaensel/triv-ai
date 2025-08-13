@@ -13,11 +13,6 @@ type Props = {
 const OpenEndedPage = async ({ params }: Props) => {
   const { gameId } = await params;
 
-  const session = await getAuthSession();
-  if (!session?.user) {
-    return redirect('/');
-  }
-
   const game = await prisma.game.findUnique({
     where: {
       id: gameId,

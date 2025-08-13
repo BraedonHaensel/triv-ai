@@ -10,7 +10,7 @@ import React from 'react';
 
 const SuggestedToipcsCard = () => {
   return (
-    <Card className="col-span-6">
+    <Card>
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Suggested Topics</CardTitle>
         <CardDescription>Create a quiz from a suggested topic!</CardDescription>

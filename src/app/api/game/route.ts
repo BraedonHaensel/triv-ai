@@ -9,21 +9,13 @@ import axios, { AxiosError } from 'axios';
 export async function POST(req: NextRequest) {
   try {
     const session = await getAuthSession();
-    if (!session?.user) {
-      return NextResponse.json(
-        {
-          error: 'You must be logged in',
-        },
-        { status: 401 }
-      );
-    }
     const body = await req.json();
     const { amount, topic, type, difficulty } = quizCreationSchema.parse(body);
     const game = await prisma.game.create({
       data: {
         gameType: type,
         timeStarted: new Date(),
-        userId: session.user.id,
+        userId: session?.user?.id,
         topic,
         difficulty,
       },

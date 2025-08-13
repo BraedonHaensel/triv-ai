@@ -67,8 +67,8 @@ enum Difficulty {
 
 model Game {
   id          String     @id @default(cuid())
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
+  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String?
   gameType    GameType
   topic       String
   difficulty  Difficulty

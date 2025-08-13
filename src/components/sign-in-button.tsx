@@ -2,22 +2,24 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-type Props = {
-  text: string;
-};
+const SignInButton = () => {
+  const router = useRouter();
+  const pathname = usePathname();
 
-const SignInButton = ({ text }: Props) => {
   return (
-    <Button
-      onClick={() => {
-        signIn('google').catch(console.error);
-      }}
-    >
-      {text}
+    <Button disabled={pathname === '/'} onClick={() => router.push('/')}>
+      Sign In
     </Button>
   );
 };
 
 export default SignInButton;
+
+/**
+ *     <Link href="/dashboard" className={buttonVariants()}>
+      Sign In
+    </Link>
+ */

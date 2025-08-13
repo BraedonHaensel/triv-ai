@@ -15,7 +15,7 @@ const RecentActivities = async () => {
   const session = await getAuthSession();
   if (!session?.user) {
     return (
-      <Card className="col-span-6">
+      <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
         </CardHeader>
@@ -24,7 +24,7 @@ const RecentActivities = async () => {
             href="/"
             className="text-muted-foreground text-sm hover:underline"
           >
-            Sign in to view this card.
+            Sign in to unlock this feature.
           </Link>
         </CardContent>
       </Card>
@@ -36,7 +36,7 @@ const RecentActivities = async () => {
   });
 
   return (
-    <Card className="col-span-6">
+    <Card>
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
         <CardDescription>

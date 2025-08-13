@@ -1,4 +1,5 @@
-import SignInButton from '@/components/sign-in-button';
+import GuestButton from '@/components/guest-button';
+import GoogleButton from '@/components/google-button';
 import {
   Card,
   CardContent,
@@ -19,15 +20,12 @@ export default async function Home() {
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Welcome to TrivAI!</CardTitle>
-          <CardDescription>
-            Are you ready to kickstart your AI-powered trivia journey? Log in
-            below to get started!
-          </CardDescription>
-          <CardContent>
-            <SignInButton text="Sign In with Google!" />
-          </CardContent>
+          <CardTitle className="text-center">Welcome to TrivAI</CardTitle>
         </CardHeader>
+        <CardContent className="flex flex-col space-y-2">
+          <GoogleButton />
+          <GuestButton />
+        </CardContent>
       </Card>
     </div>
   );

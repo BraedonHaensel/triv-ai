@@ -11,17 +11,11 @@ export const metadata = {
 };
 
 const DashboardPage = async () => {
-  const session = await getAuthSession();
-  if (!session?.user) {
-    return redirect('/');
-  }
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2">
         <QuizMeCard />
         <HistoryCard />
-      </div>
-      <div className="mt-4 grid gap-4 md:grid-cols-12">
         <SuggestedToipcsCard />
         <RecentActivities />
       </div>
