@@ -20,7 +20,9 @@ export default async function Home() {
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle className="text-center">Welcome to TrivAI</CardTitle>
+          <CardTitle className="text-center text-2xl">
+            Welcome to TrivAI
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col space-y-2">
           <GoogleButton />
