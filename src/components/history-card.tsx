@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/db';
-import { Clock, CopyCheck, Edit2 } from 'lucide-react';
+import { BookCheck, Clock, CopyCheck } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -25,7 +25,7 @@ const HistoryComponent = async ({ limit, userId }: Props) => {
               {game.gameType === 'mcq' ? (
                 <CopyCheck className="mr-3" />
               ) : (
-                <Edit2 className="mr-3 space-y-1" />
+                <BookCheck className="mr-3 space-y-1" />
               )}
               <div className="ml-4 space-y-1">
                 <Link
@@ -38,8 +38,11 @@ const HistoryComponent = async ({ limit, userId }: Props) => {
                   <Clock className="mr-1 h-4 w-4" />
                   {new Date(game.timeStarted).toLocaleDateString()}
                 </p>
-                <p className="text-muted-foreground text-sm capitalize">
-                  {`${game.gameType === 'mcq' ? 'Multiple Choice' : 'Open-Ended'} - ${game.difficulty}`}
+                <p className="text-muted-foreground text-sm">
+                  {game.gameType === 'mcq'
+                    ? 'Multiple Choice'
+                    : 'True or False'}
+                  <span className="capitalize"> - {game.difficulty}</span>
                 </p>
               </div>
             </div>

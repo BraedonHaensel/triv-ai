@@ -22,10 +22,12 @@ import { differenceInSeconds } from 'date-fns';
 import { Separator } from '@/components/ui/separator';
 
 type Props = {
-  game: Game & { questions: Pick<Question, 'id' | 'prompt' | 'options'>[] };
+  game: Game & { questions: Pick<Question, 'id' | 'prompt'>[] };
 };
 
-const MCQ = ({ game }: Props) => {
+const OPTIONS = ['True', 'False'];
+
+const TrueFalse = ({ game }: Props) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
@@ -39,17 +41,11 @@ const MCQ = ({ game }: Props) => {
     return game.questions[questionIndex];
   }, [game.questions, questionIndex]);
 
-  const options = useMemo(() => {
-    if (!currentQuestion) return [];
-    if (!currentQuestion.options) return [];
-    return JSON.parse(currentQuestion.options as string) as string[];
-  }, [currentQuestion]);
-
   const { mutate: checkAnswer, isPending: isChecking } = useMutation({
     mutationFn: async () => {
       const payload: z.infer<typeof checkAnswerSchema> = {
         questionId: currentQuestion.id,
-        userAnswer: options[selectedOptionIndex],
+        userAnswer: OPTIONS[selectedOptionIndex],
       };
       const response = await axios.post('/api/check-answer', payload);
       return response.data;
@@ -180,7 +176,8 @@ const MCQ = ({ game }: Props) => {
       </Card>
 
       <div className="mt-4 flex w-full flex-col items-center justify-center space-y-4">
-        {options.map((option, index) => {
+        {OPTIONS.map((option, index) => {
+          console.log(`Opt: ${option} corr: ${correctAnswer}`);
           return (
             <Button
               key={index}
@@ -226,4 +223,4 @@ const MCQ = ({ game }: Props) => {
   );
 };
 
-export default MCQ;
+export default TrueFalse;

@@ -32,18 +32,10 @@ const StatisticsPage = async ({ params }: Props) => {
     return redirect('/create');
   }
 
-  let accuracy: number = 0;
-  if (game.gameType == 'mcq') {
-    const totalCorrect = game.questions.reduce((acc, question) => {
-      return question.isCorrect ? acc + 1 : acc;
-    }, 0);
-    accuracy = (totalCorrect / game.questions.length) * 100;
-  } else if (game.gameType === 'open_ended') {
-    const totalPercentage = game.questions.reduce((acc, question) => {
-      return acc + (question.percentageCorrect || 0);
-    }, 0);
-    accuracy = totalPercentage / game.questions.length;
-  }
+  const totalCorrect = game.questions.reduce((acc, question) => {
+    return question.isCorrect ? acc + 1 : acc;
+  }, 0);
+  let accuracy = (totalCorrect / game.questions.length) * 100;
   accuracy = Math.round(accuracy * 100) / 100;
 
   return (
@@ -67,7 +59,7 @@ const StatisticsPage = async ({ params }: Props) => {
           timeEnded={game.timeEnded ?? new Date()}
         />
       </div>
-      <QuestionList gameType={game.gameType} questions={game.questions} />
+      <QuestionList questions={game.questions} />
     </>
   );
 };

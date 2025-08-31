@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       await prisma.question.createMany({
         data: manyData,
       });
-    } else if (type === 'open_ended') {
+    } else if (type === 'true_false') {
       type openQuestion = {
         prompt: string;
         answer: string;
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
           prompt: question.prompt,
           answer: question.answer,
           gameId: game.id,
-          questionType: 'open_ended',
+          questionType: 'true_false',
         };
       });
       await prisma.question.createMany({

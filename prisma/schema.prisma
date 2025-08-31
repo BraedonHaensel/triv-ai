@@ -56,7 +56,7 @@ model User {
 
 enum GameType {
   mcq
-  open_ended
+  true_false
 }
 
 enum Difficulty {
@@ -85,8 +85,7 @@ model Question {
   answer            String
   gameId            String
   options           Json? // mcq only
-  percentageCorrect Float? // open ended only
-  isCorrect         Boolean? // mcq only
+  isCorrect         Boolean?
   questionType      GameType
   userAnswer        String?
 

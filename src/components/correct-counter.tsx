@@ -8,7 +8,7 @@ type Props = {
   wrongAnswers: number;
 };
 
-const MCQCounter = ({ correctAnswers, wrongAnswers }: Props) => {
+const CorrectCounter = ({ correctAnswers, wrongAnswers }: Props) => {
   return (
     <Card className="flex flex-row items-center justify-center gap-0 p-2">
       <CheckCircle2 color="green" size={30} />
@@ -20,4 +20,4 @@ const MCQCounter = ({ correctAnswers, wrongAnswers }: Props) => {
   );
 };
 
-export default MCQCounter;
+export default CorrectCounter;

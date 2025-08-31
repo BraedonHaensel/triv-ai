@@ -12,11 +12,10 @@ import {
 import { Check, X } from 'lucide-react';
 
 type Props = {
-  gameType: GameType;
   questions: Question[];
 };
 
-const QuestionList = ({ gameType, questions }: Props) => {
+const QuestionList = ({ questions }: Props) => {
   return (
     <Table className="mt-4">
       <TableHeader>
@@ -25,9 +24,6 @@ const QuestionList = ({ gameType, questions }: Props) => {
           <TableHead>Question</TableHead>
           <TableHead>Correct Answer</TableHead>
           <TableHead>Your Answer</TableHead>
-          {gameType === 'open_ended' && (
-            <TableHead className="w-[10px] text-right">Accuracy</TableHead>
-          )}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -40,27 +36,14 @@ const QuestionList = ({ gameType, questions }: Props) => {
                 <TableCell>
                   <span className="font-semibold">{question.answer}</span>
                 </TableCell>
-                {questions[0].questionType === 'open_ended' ? (
-                  <>
-                    <TableCell className={`font-semibold`}>
-                      {question.userAnswer}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {question.percentageCorrect}%
-                    </TableCell>
-                  </>
-                ) : (
-                  <>
-                    <TableCell
-                      className={`flex justify-between ${
-                        question.isCorrect ? 'text-green-600' : 'text-red-600'
-                      } font-semibold`}
-                    >
-                      {question.userAnswer}
-                      {question.isCorrect ? <Check /> : <X />}
-                    </TableCell>
-                  </>
-                )}
+                <TableCell
+                  className={`flex justify-between ${
+                    question.isCorrect ? 'text-green-600' : 'text-red-600'
+                  } font-semibold`}
+                >
+                  {question.userAnswer}
+                  {question.isCorrect ? <Check /> : <X />}
+                </TableCell>
               </TableRow>
             );
           })}

@@ -12,14 +12,14 @@ import {
 // Docs: https://ai.google.dev/gemini-api/docs/structured-output#javascript.
 const ai = new GoogleGenAI({});
 
-const getOpenEndedQuestions = async (
+const getTrueFalseQuestions = async (
   amount: number,
   topic: string,
   difficulty: string
 ) => {
   const response: GenerateContentResponse = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
-    contents: `Generate a list of easy pairs of trivia questions and answers about the topic "${topic} with ${difficulty} difficulty. Limit each question to 15 words. Answers should be around 15 words`,
+    contents: `Generate a list of true or false trivia questions and answers about the topic "${topic}" with ${difficulty} difficulty. Limit each question to 15 words. Provide the correct answer as 'True' or 'False'. Do not include a true or false prompt in the question.`,
     config: {
       responseMimeType: 'application/json',
       responseSchema: {
@@ -51,7 +51,7 @@ const getMCQQuestions = async (
 ) => {
   const response: GenerateContentResponse = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
-    contents: `Generate a list of easy sets of multiple choice trivia questions and answers about the topic "${topic} with ${difficulty} difficulty. Limit each question to 15 words. Provide 1 correct answer and 3 wrong options.`,
+    contents: `Generate a list of multiple choice trivia questions and answers about the topic "${topic}" with ${difficulty} difficulty. Limit each question to 15 words. Provide 1 correct answer and 3 wrong options.`,
     config: {
       responseMimeType: 'application/json',
       responseSchema: {
@@ -104,8 +104,8 @@ export const POST = async (req: NextRequest) => {
     const body = await req.json();
     const { amount, topic, type, difficulty } = quizCreationSchema.parse(body);
     let questions;
-    if (type === 'open_ended') {
-      questions = await getOpenEndedQuestions(amount, topic, difficulty);
+    if (type === 'true_false') {
+      questions = await getTrueFalseQuestions(amount, topic, difficulty);
     } else {
       questions = await getMCQQuestions(amount, topic, difficulty);
     }

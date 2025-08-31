@@ -16,8 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { BookOpen, CopyCheck } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { BookCheck, CopyCheck } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -77,8 +76,8 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
         onSuccess: ({ gameId }) => {
           setLoadingFinished(true);
           setTimeout(() => {
-            if (form.getValues('type') == 'open_ended') {
-              router.push(`/play/open-ended/${gameId}`);
+            if (form.getValues('type') == 'true_false') {
+              router.push(`/play/true-false/${gameId}`);
             } else {
               router.push(`/play/mcq/${gameId}`);
             }
@@ -100,7 +99,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
   }
 
   return (
-    <Card>
+    <Card className="min-w-[380px]">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Quiz Creator</CardTitle>
       </CardHeader>
@@ -126,18 +125,23 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Number of Questions</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter an amount..."
-                      {...field}
-                      type="number"
-                      min={1}
-                      max={10}
-                      onChange={(e) => {
-                        form.setValue('amount', parseInt(e.target.value));
-                      }}
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={(val) => field.onChange(Number(val))}
+                    defaultValue={field.value.toString()}
+                  >
+                    <FormControl className="w-full">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {[1, 3, 5, 10].map((num) => (
+                        <SelectItem key={num} value={num.toString()}>
+                          {num}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -154,7 +158,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
                   >
                     <FormControl className="w-full">
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
+                        <SelectValue />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -167,7 +171,7 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between">
+            <div className="flex">
               <Button
                 type="button"
                 className="w-1/2 rounded-none rounded-l-lg"
@@ -178,23 +182,23 @@ const QuizCreationCard = ({ prefilledTopic = '' }: Props) => {
                   form.getValues('type') === 'mcq' ? 'default' : 'secondary'
                 }
               >
-                <CopyCheck className="mr-2 h-4 w-4" />
+                <CopyCheck className="h-4 w-4" />
                 Multiple Choice
               </Button>
-              <Separator orientation="vertical" />
               <Button
                 type="button"
                 className="w-1/2 rounded-none rounded-r-lg"
                 onClick={() => {
-                  form.setValue('type', 'open_ended');
+                  form.setValue('type', 'true_false');
                 }}
                 variant={
-                  form.getValues('type') === 'open_ended'
+                  form.getValues('type') === 'true_false'
                     ? 'default'
                     : 'secondary'
                 }
               >
-                <BookOpen className="mr-2 h-4 w-4" /> Open Ended
+                <BookCheck className="h-4 w-4" />
+                True or False
               </Button>
             </div>
             <Button disabled={isPending} type="submit">

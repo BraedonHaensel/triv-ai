@@ -44,25 +44,22 @@ export async function POST(req: NextRequest) {
         },
         { status: 200 }
       );
-    } else if (question.questionType === 'open_ended') {
-      let percentageSimilar = compareTwoStrings(
-        userAnswer.toLowerCase().trim(),
-        question.answer.toLowerCase().trim()
-      );
-      percentageSimilar = Math.round(percentageSimilar * 100);
+    } else if (question.questionType === 'true_false') {
+      const isCorrect =
+        question.answer.toLowerCase().trim() ===
+        userAnswer.toLowerCase().trim();
       await prisma.question.update({
         where: { id: questionId },
         data: {
-          percentageCorrect: percentageSimilar,
+          isCorrect,
         },
       });
       return NextResponse.json(
         {
-          percentageSimilar,
+          isCorrect,
+          correctAnswer: question.answer,
         },
-        {
-          status: 200,
-        }
+        { status: 200 }
       );
     }
   } catch (error) {

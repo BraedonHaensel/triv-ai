@@ -1,4 +1,4 @@
-import OpenEnded from '@/components/open-ended';
+import TrueFalse from '@/components/true-false';
 import { prisma } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -14,7 +14,7 @@ type Props = {
   }>;
 };
 
-const OpenEndedPage = async ({ params }: Props) => {
+const TrueFalsePage = async ({ params }: Props) => {
   const { gameId } = await params;
 
   const game = await prisma.game.findUnique({
@@ -26,15 +26,14 @@ const OpenEndedPage = async ({ params }: Props) => {
         select: {
           id: true,
           prompt: true,
-          answer: true,
         },
       },
     },
   });
-  if (!game || game.gameType !== 'open_ended') {
+  if (!game || game.gameType !== 'true_false') {
     return redirect('/create');
   }
-  return <OpenEnded game={game} />;
+  return <TrueFalse game={game} />;
 };
 
-export default OpenEndedPage;
+export default TrueFalsePage;
